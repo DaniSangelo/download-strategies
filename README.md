@@ -75,6 +75,15 @@ Open [http://localhost:3000](http://localhost:3000). The API listens on port `30
 | Asynchronous with S3 | `POST /exports/s3`, then poll `GET /exports/s3/:id` | The API uploads the completed workbook to S3 and returns a time-limited signed URL. |
 | Asynchronous with SSE | `POST /exports/sse`, then subscribe to `GET /exports/sse/:id/events` | Progress and completion are sent as SSE events; download the file from `GET /exports/sse/:id/download`. |
 
+#### Synchronous download
+![alt text](sync.gif) <br>
+
+#### Asynchronous download (S3)
+![alt text](s3.gif) <br>
+
+#### Asynchronous download (SSE)
+![alt text](sse.gif) <br>
+
 The S3 and SSE job state is held in memory, so active jobs are lost when the API process restarts. The SSE strategy keeps the generated workbook in memory as well.
 
 ## Suggested improvements
