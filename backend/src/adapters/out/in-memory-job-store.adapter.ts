@@ -5,7 +5,7 @@ import { ExportJob } from 'src/domain/export-job';
 import { ExportJobStorePort } from 'src/domain/ports/export-job-store.port';
 
 @Injectable()
-export class InMemoryJobStoreAdpter implements ExportJobStorePort {
+export class InMemoryJobStoreAdapter implements ExportJobStorePort {
   private jobs = new Map<string, ExportJob>();
   private files = new Map<string, Buffer>();
   private streams = new Map<string, ReplaySubject<ExportJob>>();
