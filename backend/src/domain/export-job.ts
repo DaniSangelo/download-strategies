@@ -1,15 +1,9 @@
-export type ExportStatus = 'PENDING' | 'PROCESSING' | 'COMPLETED' | 'FAILED';
+export type ExportJobStatus = 'pending' | 'processing' | 'done' | 'error';
 
-export class ExportJob {
-  status: ExportStatus = 'PENDING';
-  progress: number = 0;
-  content?: string; // SSE
-  fileKey?: string; // S3 + presigned URL
-
-  constructor(public readonly id: string) {}
+export interface ExportJob {
+  id: string;
+  status: ExportJobStatus;
+  progress: number; // 0-100
+  fileKey?: string; // S3
+  error?: string;
 }
-
-export type ExportEvent =
-  | { type: 'progress'; progress: number }
-  | { type: 'completed' }
-  | { type: 'failed' };
