@@ -42,7 +42,7 @@ export class ExportController {
     return { jobId: this.s3Export.start() };
   }
 
-  @Get('se/:id')
+  @Get('s3/:id')
   async s3Status(@Param('id') id: string) {
     const status = await this.s3Export.getStatus(id);
     if (!status) throw new NotFoundException('Job not found');
