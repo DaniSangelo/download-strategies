@@ -1,13 +1,10 @@
-export abstract class FileStoragePort {
-  abstract upload(
-    key: string,
-    body: string,
-    contentType: string,
-  ): Promise<void>;
-
-  abstract getDownloadUrl(
+export interface FileStoragePort {
+  upload(key: string, body: Buffer, contentType: string): Promise<void>;
+  getDownloadUrl(
     key: string,
     fileName: string,
     expiresInSeconds: number,
   ): Promise<string>;
 }
+
+export const FILE_STORAGE_PORT = Symbol('FILE_STORAGE_PORT');
