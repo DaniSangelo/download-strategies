@@ -26,6 +26,7 @@ export class ExportController {
     private readonly sseExport: SseExportUseCase,
   ) {}
 
+  //#region Sync
   @Get('sync')
   async sync(@Res({ passthrough: true }) res: Response) {
     const buffer = await this.syncExport.execute();
@@ -35,7 +36,9 @@ export class ExportController {
     });
     return new StreamableFile(buffer);
   }
+  //#endregion Sync
 
+  //#region S3
   @Post('s3')
   @HttpCode(HttpStatus.ACCEPTED)
   startS3() {
@@ -48,7 +51,9 @@ export class ExportController {
     if (!status) throw new NotFoundException('Job not found');
     return status;
   }
+  //#endregion S3
 
+  //#region sse
   @Post('sse')
   @HttpCode(HttpStatus.ACCEPTED)
   startSse() {
@@ -80,4 +85,5 @@ export class ExportController {
     });
     return new StreamableFile(file);
   }
+  //#endregion sse
 }
